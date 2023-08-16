@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>Python Flask Upload and display image</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<style>
+    body{
+        background-color: #5cdb95;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: large;
+    }
+
+    h1{
+        color:
+         #e42323df;
+    }
+
+    h2{
+        color: #edf5e1;
+    }
+
+    #authors{
+        font-size: 30px;
+        color: #e42323df;
+        float:right;
+
+    }
+
+    #imageDiv{
+        float:inline-start
+    }
+
+</style>
+</head>
+<body>
+<p><h1 align="center">AI  Project <br>Mask Detection Model</h1></p>
+<div class="container">
+<div class="row">
+    <h2>Select an Image or Video from your local directory</h2>
+    <p>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </p>
+    <p style="color: #edf5e1;">Video will be saved to static/results directory and photos will be display here below</p>
+    <form method="post" action="/liveStream">
+        <input type="submit" value="Click for Live Detection" class="btn btn-primary">
+    </form>
+    <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="file" class="form-control" autocomplete="off" required style="background-color: antiquewhite;">
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Submit" class="btn btn-danger">
+        </p>
+        {% if user_image %}
+        <div id="imageDiv">
+            <p>{{user_image}}</p>
+            <img src="../static/results/{{user_image}}" width=800 height=500 alt="empty box waiting for upload">
+            <!-- <iframe width="420" height="345" src="../static/results/test-video_-_Made_with_Clipchamp.mp4">
+            </iframe> -->     
+        </div>
+        {% endif %}
+        <div id="authors">
+        <p>Development By <br>Ameet Kumar <br>Rashid Abbas <br>Sanjay Kumar</p>
+       </div>
+    </form>
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+<!-- <html>
+   <body>
+      <form action = "http://localhost:5000/uploader" method = "POST" 
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "submit"/>
+         <img src="{{ user_image }}" alt="User Image">
+      </form>   
+   </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <img src="{{ user_image }}" alt="User Image">
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mask Detection App</title>
+</head>
+<body>
+    <form action="greet" method="post">
+        <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+        <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+         <p><img id="output" width="500" name="output"/></p>
+
+         {% for message in get_flashed_messages()%}
+              <p>{{message}}</p>
+         {% endfor %}
+    </form>
+
+    <script>
+        var loadFile = function(event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+        </script> 
+</body>
+</html> -->
